@@ -154,10 +154,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eae9be57397f11042bffa4ef1a787e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  projectileStartScale: 0.4
   projectilePrefab: {fileID: 475068635469871151, guid: 846ab6a7e6d960b439a4496a1f684c52, type: 3}
   shotPoint: {fileID: 5962421144225827319}
   growthSpeed: 0.8
   minScale: 0.3
+  shootForce: 15
+  shootCooldown: 0.5
   jumpForce: 4
   forwardForce: 4
 --- !u!1 &8169668171555983496
@@ -185,7 +188,7 @@ Transform:
   m_GameObject: {fileID: 8169668171555983496}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.07, y: 0.053, z: 2.97}
+  m_LocalPosition: {x: 0.07, y: 0.053, z: 0.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

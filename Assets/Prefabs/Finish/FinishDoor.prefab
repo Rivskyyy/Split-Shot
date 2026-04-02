@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4188b29726356cd4f8ddd02b04d8754f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FinishDoor
-  player: {fileID: 1214643528785787078, guid: f0c429f7c78a15b4eac5b360b597b8e7, type: 3}
+  player: {fileID: 0}
   openDistance: 5
-  openSpeed: 2
-  lowerLimit: -5
+  openSpeed: 1
+  lowerLimit: -3

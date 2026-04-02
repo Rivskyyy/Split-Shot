@@ -2,50 +2,68 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private float explosionRadius;
+    [Header("Components")]
+  
+    public Rigidbody rigibody;
+    public Collider collider;
+
+    [Header("Explosion Settings")]
+    [SerializeField] private float baseRadiusMultiplier = 1.3f;
+
+    private bool isExploded = false;
 
     private void Start()
     {
-        Destroy(gameObject, 5f);
+      
+        Destroy(gameObject, 3f);
     }
-
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Plane"))
+        if (isExploded) return;
+
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Plane"))
         {
             return;
         }
-        if(collision.gameObject.CompareTag("Obstacle"))
-        {
-            Explode();
-        }
-        
+
+      
+        Explode();
     }
 
-   private void Explode()
+    private void Explode()
     {
+        isExploded = true;
 
-        float dynamicRadius = transform.localScale.x * 1.3f;
+     
+        float dynamicRadius = transform.localScale.x * baseRadiusMultiplier;
 
+      
         Collider[] obstacles = Physics.OverlapSphere(transform.position, dynamicRadius);
 
-        foreach (Collider col in obstacles)
+        foreach (Collider obstacleCollider in obstacles)
         {
-            Renderer rend = col.GetComponent<Renderer>();
-            if (col.CompareTag("Obstacle"))
+            if (obstacleCollider.CompareTag("Obstacle"))
             {
-                if(rend != null)
+                Renderer rend = obstacleCollider.GetComponent<Renderer>();
+                if (rend != null)
                 {
+                   
                     rend.material.color = Color.red;
                 }
-                Destroy(col.gameObject, 0.2f);
+    
+                Destroy(obstacleCollider.gameObject, 0.2f);
             }
         }
 
+      
         Destroy(gameObject);
     }
 
 
-
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, transform.localScale.x * baseRadiusMultiplier);
+    }
 }

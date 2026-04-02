@@ -153,4 +153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03b1b150b2a12284da6b636700808263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
-  explosionRadius: 1
+  rigibody: {fileID: 3284315357040610265}
+  collider: {fileID: 4883644112300907569}
+  baseRadiusMultiplier: 1
