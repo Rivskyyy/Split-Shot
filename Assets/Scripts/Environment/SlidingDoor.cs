@@ -1,11 +1,12 @@
+using TMPro;
 using UnityEngine;
 
-public class FinishDoor : MonoBehaviour
+public class SlidingDoor : MonoBehaviour
 {
     [SerializeField] Transform player;
     [SerializeField] float openDistance = 5f;
     [SerializeField] float openSpeed = 2f;
-    [SerializeField] float lowerLimit = 1.5f;
+    [SerializeField] float lowerLimit = -5.5f;
 
     private bool shouldOpen = false;
 
@@ -24,7 +25,9 @@ public class FinishDoor : MonoBehaviour
         if(shouldOpen)
         {
             Vector3 targetPos = new Vector3(transform.position.x, lowerLimit, transform.position.z);
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, downSpeed * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, targetPos, openSpeed * Time.deltaTime);
+            
+
         }
     }
 }

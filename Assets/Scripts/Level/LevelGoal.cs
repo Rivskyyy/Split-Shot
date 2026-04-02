@@ -6,14 +6,12 @@ public class LevelGoal : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            //LevelManager.Instance.CompleteLevel();
             CompleteLevel();
         }
     }
 
     private void CompleteLevel()
     {
-        //LevelManager.Instance.CompleteLevel();
         Debug.Log("Level Passed!");
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);

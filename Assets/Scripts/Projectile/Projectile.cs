@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private float explosionRadius = 5f;
+    [SerializeField] private float explosionRadius;
 
     private void Start()
     {
@@ -25,11 +25,10 @@ public class Projectile : MonoBehaviour
 
    private void Explode()
     {
-   
-        float dynamicRadius = transform.localScale.x * 2f;
 
-        // ¬¿∆À»¬Œ: œÂÂ‰‡∫ÏÓ Ò‡ÏÂ dynamicRadius Û OverlapSphere
-        Collider[] obstacles = Physics.OverlapSphere(transform.position, explosionRadius);
+        float dynamicRadius = transform.localScale.x * 1.3f;
+
+        Collider[] obstacles = Physics.OverlapSphere(transform.position, dynamicRadius);
 
         foreach (Collider col in obstacles)
         {
@@ -40,7 +39,7 @@ public class Projectile : MonoBehaviour
                 {
                     rend.material.color = Color.red;
                 }
-                Destroy(col.gameObject, 0.3f);
+                Destroy(col.gameObject, 0.2f);
             }
         }
 

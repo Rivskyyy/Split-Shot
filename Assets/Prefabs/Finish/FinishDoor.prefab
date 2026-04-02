@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4942868254533437449}
   - component: {fileID: 138630153846478908}
   - component: {fileID: 7358754103166990026}
+  - component: {fileID: 8543674704585545164}
   m_Layer: 0
   m_Name: FinishDoor
   m_TagString: Untagged
@@ -140,3 +141,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &8543674704585545164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5680903255984491846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4188b29726356cd4f8ddd02b04d8754f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FinishDoor
+  player: {fileID: 1214643528785787078, guid: f0c429f7c78a15b4eac5b360b597b8e7, type: 3}
+  openDistance: 5
+  openSpeed: 2
+  lowerLimit: -5
