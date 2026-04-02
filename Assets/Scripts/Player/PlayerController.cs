@@ -9,15 +9,18 @@ public class PlayerController : MonoBehaviour
     private Collider projectileCollider;
     private Collider playerCollider;
 
+    [SerializeField] private float projectileStartScale = 0.4f;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform shotPoint;
-    [SerializeField] private float growthSpeed;
-    [SerializeField] private float minScale;
-    [SerializeField] private float shootForce;
+    [SerializeField] private float growthSpeed = 0.7f;
+    [SerializeField] private float minScale = 0.3f;
+    [SerializeField] private float shootForce = 15f;
+    [SerializeField] private float shootCooldown = 0.5f;
+    private float lastShootTime;
 
     [Header("Movement settings")]
-    [SerializeField] private float jumpForce;
-    [SerializeField] private float forwardForce;
+    [SerializeField] private float jumpForce = 4f;
+    [SerializeField] private float forwardForce = 3f;
 
     private void Awake()
     {
@@ -34,6 +37,9 @@ public class PlayerController : MonoBehaviour
 
     private void HandleInput()
     {
+        if (Time.time - lastShootTime < shootCooldown)
+            return;
+
         if (currentProjectile != null)
             return;
 
@@ -41,7 +47,7 @@ public class PlayerController : MonoBehaviour
         {
             currentProjectile = Instantiate(projectilePrefab, shotPoint.position, shotPoint.rotation);
 
-            currentProjectile.transform.localScale = new  Vector3(0.4f,0.4f,0.4f);
+            currentProjectile.transform.localScale = Vector3.one * projectileStartScale;
 
             projectileRb = currentProjectile.GetComponent<Rigidbody>();
             projectileCollider = currentProjectile.GetComponent<Collider>();
@@ -83,7 +89,7 @@ public class PlayerController : MonoBehaviour
             projectileRb.AddForce(shotPoint.forward * shootForce, ForceMode.Impulse);
 
             currentProjectile = null;
-
+            lastShootTime = Time.time;
             MoveForward();
         }
     }
@@ -91,7 +97,7 @@ public class PlayerController : MonoBehaviour
     private void MoveForward()
     {
         Vector3 currentVel = rb.linearVelocity;
-        rb.linearVelocity = new Vector3(0, currentVel.y, 0);
+        rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
         Vector3 jumpVector = (Vector3.up * jumpForce) + (transform.forward * forwardForce);
